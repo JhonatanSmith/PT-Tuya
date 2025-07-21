@@ -88,3 +88,9 @@ def limpiar_columna_numerica(df, col):
     df = df.dropna(subset=[col])
 
     return df, n_invalidos
+
+def load_data(path: str) -> pd.DataFrame:
+    """Carga el dataset desde un archivo CSV y convierte la columna de fecha."""
+    df = pd.read_csv(path)
+    df["fecha_efectiva"] = pd.to_datetime(df["fecha_efectiva"], format="%Y-%m-%d", errors="coerce")
+    return df
